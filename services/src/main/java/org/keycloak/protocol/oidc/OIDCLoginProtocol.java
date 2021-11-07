@@ -329,7 +329,7 @@ public class OIDCLoginProtocol implements LoginProtocol {
     @Override
     public Response backchannelLogout(UserSessionModel userSession, AuthenticatedClientSessionModel clientSession) {
         ClientModel client = clientSession.getClient();
-        if (OIDCAdvancedConfigWrapper.fromClientModel(clientSession.getClient()).getBackchannelLogoutUrl() != null) {
+        if (ResourceAdminManager.getBackchannelLogoutUrl(session, client) != null) {
             return new ResourceAdminManager(session).logoutClientSessionWithBackchannelLogoutUrl(client, clientSession);
         } else {
             return new ResourceAdminManager(session).logoutClientSession(realm, client, clientSession);
